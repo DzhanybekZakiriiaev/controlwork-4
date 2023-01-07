@@ -19,29 +19,50 @@ public class Main {
             if (option.equals("1")) {
                 System.out.print("Enter cat number: ");
                 int catNumber = sc.nextInt() - 1;
-                Cat.feedCat(myCats.get(catNumber));
-                myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
-                        .collect(Collectors.toList());;
-                System.out.printf("You fed %s, age is %s%n", myCats.get(catNumber).getName(), myCats.get(catNumber).getAge());
-                run(myCats);
+                if (myCats.get(catNumber).isAction() == false){
+                    Cat.feedCat(myCats.get(catNumber));
+                    myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
+                            .collect(Collectors.toList());;
+                    System.out.printf("You fed %s, age is %s%n", myCats.get(catNumber).getName(), myCats.get(catNumber).getAge());
+                    myCats.get(catNumber).setAction(true);
+                    run(myCats);
+                }
+                else {
+                    System.out.println("You have already interacted with this cat");
+                    run(myCats);
+                }
             }
             else if (option.equals("2")) {
                 System.out.print("Enter cat number: ");
                 int catNumber = sc.nextInt() - 1;
-                Cat.playCat(myCats.get(catNumber));
-                myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
-                        .collect(Collectors.toList());;
-                System.out.printf("You played with %s, age is %s%n", myCats.get(catNumber).getName(), myCats.get(catNumber).getAge());
-                run(myCats);
+                if (myCats.get(catNumber).isAction() == false){
+                    Cat.playCat(myCats.get(catNumber));
+                    myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
+                            .collect(Collectors.toList());;
+                    System.out.printf("You played with %s, age is %s%n", myCats.get(catNumber).getName(), myCats.get(catNumber).getAge());
+                    myCats.get(catNumber).setAction(true);
+                    run(myCats);
+                }
+                else {
+                    System.out.println("You have already interacted with this cat");
+                    run(myCats);
+                }
             }
             else if (option.equals("3")) {
                 System.out.print("Enter cat number: ");
                 int catNumber = sc.nextInt() - 1;
-                Cat.healCat(myCats.get(catNumber));
-                myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
-                        .collect(Collectors.toList());;
-                System.out.printf("You healed %s, age is %s%n", myCats.get(catNumber).getName(), myCats.get(catNumber).getAge());
-                run(myCats);
+                if (myCats.get(catNumber).isAction() == false){
+                    Cat.healCat(myCats.get(catNumber));
+                    myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
+                            .collect(Collectors.toList());;
+                    System.out.printf("You healed %s, age is %s%n", myCats.get(catNumber).getName(), myCats.get(catNumber).getAge());
+                    myCats.get(catNumber).setAction(true);
+                    run(myCats);
+                }
+                else {
+                    System.out.println("You have already interacted with this cat");
+                    run(myCats);
+                }
             }
             else if (option.equals("a")) {
                 System.out.print("Enter cat name: ");
@@ -56,6 +77,7 @@ public class Main {
             else if (option.equals("n")) {
                 System.out.println("NEXT DAY");
                 myCats.stream().forEach(cat -> cat.nextDay(cat));
+                myCats.stream().forEach(cat -> cat.setAction(false));
                 myCats = myCats.stream().sorted(Comparator.comparingInt(Cat::getOverall))
                         .collect(Collectors.toList());
                 run(myCats);

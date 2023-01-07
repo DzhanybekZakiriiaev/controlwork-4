@@ -8,6 +8,15 @@ public class Cat{
     private int hunger;
     private int mood;
     private int health;
+    private boolean action;
+
+    public boolean isAction() {
+        return action;
+    }
+
+    public void setAction(boolean action) {
+        this.action = action;
+    }
 
     public String getName() {
         return name;
@@ -55,6 +64,7 @@ public class Cat{
         this.hunger = hunger;
         this.mood = mood;
         this.health = health;
+        this.action = false;
     }
     public static void checkStats(Cat cat){
         if (cat.getHunger() > 100){
