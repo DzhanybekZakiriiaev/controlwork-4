@@ -56,11 +56,97 @@ public class Cat{
         this.mood = mood;
         this.health = health;
     }
+    public static void checkStats(Cat cat){
+        if (cat.getHunger() > 100){
+            cat.setHunger(100);
+        }
+        if (cat.getHunger() < 0){
+            cat.setHunger(0);
+        }
+        if (cat.getMood() > 100){
+            cat.setMood(100);
+        }
+        if (cat.getMood() < 0){
+            cat.setMood(0);
+        }
+        if (cat.getHealth() > 100){
+            cat.setHealth(100);
+        }
+        if (cat.getHealth() < 0){
+            cat.setHealth(0);
+        }
+    }
 
     public int getOverall(){
         return (getHealth()+getMood()+getHunger())/3;
     }
-
+    public static void feedCat(Cat cat){
+        if (cat.getAge() < 6){
+            cat.setHunger(cat.getHunger()+7);
+            cat.setMood(cat.getMood()+7);
+        }
+        else if(cat.getAge() < 10 && cat.getAge() > 6){
+            cat.setHunger(cat.getHunger()+5);
+            cat.setMood(cat.getMood()+5);
+        }
+        else if(cat.getAge() > 10){
+            cat.setHunger(cat.getHunger()+4);
+            cat.setMood(cat.getMood()+4);
+        }
+        checkStats(cat);
+    }
+    public static void healCat(Cat cat){
+        if (cat.getAge() < 6){
+            cat.setHunger(cat.getHunger()-3);
+            cat.setMood(cat.getMood()-3);
+            cat.setHealth(cat.getHealth()+7);
+        }
+        else if(cat.getAge() < 10 && cat.getAge() > 6){
+            cat.setHunger(cat.getHunger()-5);
+            cat.setMood(cat.getMood()-5);
+            cat.setHealth(cat.getHealth()+5);
+        }
+        else if(cat.getAge() > 10){
+            cat.setHunger(cat.getHunger()-6);
+            cat.setMood(cat.getMood()-6);
+            cat.setHealth(cat.getHealth()+4);
+        }
+        checkStats(cat);
+    }
+    public void nextDay(Cat cat){
+        Random rnd = new Random();
+        int health = rnd.nextInt(7)-3;
+        cat.setHealth(cat.getHealth()+health);
+        int mood = rnd.nextInt(7)-3;
+        cat.setMood(cat.getMood()+mood);
+        int hunger = rnd.nextInt(5)+1;
+        cat.setHunger(cat.getHunger()-hunger);
+    }
+    public static void playCat(Cat cat){
+        if (cat.getAge() < 6){
+            cat.setHunger(cat.getHunger()-3);
+            cat.setMood(cat.getMood()+7);
+            cat.setHealth(cat.getHealth()+7);
+        }
+        else if(cat.getAge() < 10 && cat.getAge() > 6){
+            cat.setHunger(cat.getHunger()-5);
+            cat.setMood(cat.getMood()+5);
+            cat.setHealth(cat.getHealth()+5);
+        }
+        else if(cat.getAge() > 10){
+            cat.setHunger(cat.getHunger()-6);
+            cat.setMood(cat.getMood()+4);
+            cat.setHealth(cat.getHealth()+4);
+        }
+        checkStats(cat);
+    }
+    public static Cat buyCat(String name, int age){
+        Random rnd = new Random();
+        int health = rnd.nextInt(61)+20;
+        int mood = rnd.nextInt(61)+20;
+        int hunger = rnd.nextInt(61)+20;
+        return new Cat(name, age, health, mood, hunger);
+    }
     public static List<Cat> generateCats(){
         List<Cat> cats = new ArrayList<>(3);
         Random rnd = new Random();
